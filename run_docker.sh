@@ -16,10 +16,11 @@ else
 fi
 
 mkdir -p out
+mkdir -p out/images
 
 echo "Starting Buildroot container..."
 docker run -it --rm \
-  -v "$(pwd)/out":/opt/buildroot/output \
+  -v "$(pwd)/out/images":/opt/buildroot/output/images \
   -w /opt/buildroot \
-  my-ubuntu-buildroot:latest
+  $IMAGE_NAME \
 
