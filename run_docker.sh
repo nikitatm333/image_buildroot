@@ -1,26 +1,36 @@
 #!/bin/bash
 set -e
-	
-IMAGE_NAME="my-ubuntu-buildroot:latest"
+
+IMAGE_NAME="buildroot-1"
 
 if [[ "$1" == "--rebuild" ]]; then
     echo "Rebuilding Docker image..."
     docker build --no-cache -t "$IMAGE_NAME" .
 else
     if ! docker image inspect "$IMAGE_NAME" > /dev/null 2>&1; then
-	echo "Building Docker image..."
+        echo "Building Docker image..."
         docker build -t "$IMAGE_NAME" .
     else
-        echo "Image $IMAGE_NAME already"
+        echo "Image $IMAGE_NAME already exists"
     fi
 fi
 
-mkdir -p out
+# Создаём dir для артефактов и кешей
 mkdir -p out/images
+mkdir -p out/dl
+mkdir -p out/ccache
 
 echo "Starting Buildroot container..."
-docker run -it --rm \
-  -v "$(pwd)/out/images":/opt/buildroot/output/images \
+
+docker run -it --rm --name buildroot-1 \
+  --user "$(id -u):$(id -g)" \
+  --mount type=bind,source="$(pwd)",target=/br-ext-buildroot \
+  --mount type=bind,source="$(pwd)/out/images",target=/opt/buildroot/output/images \
+  --mount type=bind,source="$(pwd)/out/dl",target=/opt/buildroot/dl \
+  --mount type=bind,source="$(pwd)/out/ccache",target=/ccache \
+  --env FORCE_UNSAFE_CONFIGURE=1 \
+  --env CCACHE_DIR=/ccache \
   -w /opt/buildroot \
   $IMAGE_NAME \
+  bash
 

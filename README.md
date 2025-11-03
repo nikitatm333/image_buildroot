@@ -16,4 +16,14 @@ chmod +x run_docker.sh
 # Если нужно, то можно пересобрать ./run_docker.sh --rebuild
 ```
 
+## Структура
+.
+├─ board/                # board support (board/<vendor>/<board>/...)
+├─ configs/              # defconfig'ы для buildroot
+├─ package/              # кастомные package'ы (если есть)
+├─ patches/              # патчи, если нужны
+├─ host-scripts/         # опционально: вспомогательные скрипты 
+├─ run_docker.sh
+└   Dockerfile
+
 
