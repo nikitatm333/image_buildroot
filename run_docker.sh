@@ -23,14 +23,13 @@ mkdir -p out/ccache
 echo "Starting Buildroot container..."
 
 docker run -it --rm --name buildroot-1 \
-  --user "$(id -u):$(id -g)" \
   --mount type=bind,source="$(pwd)",target=/br-ext-buildroot \
-  --mount type=bind,source="$(pwd)/out/images",target=/opt/buildroot/output/images \
-  --mount type=bind,source="$(pwd)/out/dl",target=/opt/buildroot/dl \
+  --mount type=bind,source="$(pwd)/out/images",target=/buildroot/output/images \
+  --mount type=bind,source="$(pwd)/out/dl",target=/buildroot/dl \
   --mount type=bind,source="$(pwd)/out/ccache",target=/ccache \
   --env FORCE_UNSAFE_CONFIGURE=1 \
   --env CCACHE_DIR=/ccache \
-  -w /opt/buildroot \
+  -w /buildroot \
   $IMAGE_NAME \
   bash
 

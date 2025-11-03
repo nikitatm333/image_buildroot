@@ -12,13 +12,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone --depth 1 --branch ${BUILDROOT_REF} https://gitlab.com/buildroot.org/buildroot.git /opt/buildroot || \
-    (git clone https://gitlab.com/buildroot.org/buildroot.git /opt/buildroot && cd /opt/buildroot && git checkout ${BUILDROOT_REF})
+RUN git clone --depth 1 --branch ${BUILDROOT_REF} https://gitlab.com/buildroot.org/buildroot.git /buildroot || \
+    (git clone https://gitlab.com/buildroot.org/buildroot.git /buildroot && cd /buildroot && git checkout ${BUILDROOT_REF})
 
-WORKDIR /opt/buildroot
+WORKDIR /buildroot
 
-# (опционально) место для монтирования
-VOLUME [ "/br-ext-buildroot", "/opt/buildroot/output/images", "/opt/buildroot/dl", "/ccache" ]
+# (опционально) места для монтирования
+VOLUME [ "/br-ext-buildroot", "/buildroot/output/images", "/buildroot/dl", "/ccache" ]
 
 CMD ["/bin/bash"]
 
