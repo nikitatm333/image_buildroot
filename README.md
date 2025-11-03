@@ -1,4 +1,4 @@
-# image_buildroot
+# br-ext-buildroot
 
 Этот репозиторий содержит инструменты для сборки образов с помощью buildroot в контейнере Docker.
 
@@ -24,12 +24,11 @@ chmod +x run_docker.sh
 
 ```text
 .
-├── board/               # board support (board/<vendor>/<board>/...)
-├── boconfigs/           # defconfig'ы для buildroot
-├── rupackage/           # кастомные package'ы (если есть)
-├── rupatches/           # патчи, если нужны
-├── ruhost-scripts/      # опционально: вспомогательные скрипты
-├── rurun_docker.sh      # скрипт запуска контейнера buildroot
-└── Dockerfile           # образ окружения для сборки
+├── board/             # board support
+├── configs/           # defconfig для buildroot
+├── package/           # кастомные package
+├── patches/           # патчи
+├── host-scripts/      # опционально: вспомогательные скрипты
+├── run_docker.sh      # скрипт запуска контейнера buildroot
+└── Dockerfile         # образ окружения для сборки
 ```
-
