@@ -2,6 +2,10 @@
 
 Этот репозиторий содержит инструменты для сборки образов с помощью buildroot в контейнере Docker.
 
+# Структура репозитория
+
+Проект организован как внешний BR2_EXTERNAL для Buildroot — в корне лежат платы, конфиги и вспомогательные скрипты.
+
 ## Содержимое
 
 - `Dockerfile` — образ на Ubuntu с предустановленным Buildroot.
@@ -17,13 +21,15 @@ chmod +x run_docker.sh
 ```
 
 ## Структура
-.
-├─ board/                # board support (board/<vendor>/<board>/...)
-├─ configs/              # defconfig'ы для buildroot
-├─ package/              # кастомные package'ы (если есть)
-├─ patches/              # патчи, если нужны
-├─ host-scripts/         # опционально: вспомогательные скрипты 
-├─ run_docker.sh
-└   Dockerfile
 
+```text
+.
+├── board/               # board support (board/<vendor>/<board>/...)
+├── boconfigs/           # defconfig'ы для buildroot
+├── rupackage/           # кастомные package'ы (если есть)
+├── rupatches/           # патчи, если нужны
+├── ruhost-scripts/      # опционально: вспомогательные скрипты
+├── rurun_docker.sh      # скрипт запуска контейнера buildroot
+└── Dockerfile           # образ окружения для сборки
+```
 
