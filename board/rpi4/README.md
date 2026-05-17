@@ -106,3 +106,8 @@ printf '\x00\x00\xff\xff%.0s' $(seq 1 $((160*128))) > /dev/fb0
 # чёрный экран
 dd if=/dev/zero of=/dev/fb0
 ```
+
+## Запуск модели на llama
+```
+/usr/local/bin/llama-simple-chat -m /root/models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+```

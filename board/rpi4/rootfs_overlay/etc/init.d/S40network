@@ -1,0 +1,9 @@
+#!/bin/sh
+case "$1" in
+    start)
+        ifup -a
+        ;;
+    stop)
+        ifdown -a
+        ;;
+esac
